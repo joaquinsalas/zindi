@@ -29,7 +29,12 @@ The training (labeled) and test (non-labeled) data is located at https://drive.g
 * Testing 120k records
 * 16 x 16 x 6 landsat image patches
 
-# Methods Explored
+# Leaderboard for Methods Explored
+
+| Method | ROC AUC | Filename                                    |Description                                |
+---------|---------|---------------------------------------------|-------------------------------------------|
+| RF     |         | gcim_challenge_baseline_models.ipynb        |jupyter notebook provided by the organizers|
+| NN     |         | gcim_challenge_baseline_models.ipynb        |jupyter notebook provided by the organizers|
 
 
 
