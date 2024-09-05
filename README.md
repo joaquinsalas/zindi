@@ -23,11 +23,14 @@ The competition details can be reviewed at https://zindi.africa/competitions/ine
 
 # Dataset
 
-The training (labeled) and test (non-labeled) data is located at https://drive.google.com/drive/folders/1cmrvNLNZq01pSrjQDneuE_N80rcmeNq3?usp=sharing
+The training (labeled) and test (non-labeled) data is located at https://drive.google.com/drive/folders/1cmrvNLNZq01pSrjQDneuE_N80rcmeNq3?usp=sharing The Drive folder contains the files:
 
-* Training 1.1M records
-* Testing 120k records
-* 16 x 16 x 6 landsat image patches
+* train_data.h5: Training 1.1M records
+* test_data.h5: Testing 120k records
+* id_map.csv: identificator for the entries in the test data split. 
+
+
+The landsat image patches have dimensions 16 (pixels) x 16 (pixels) x 6 (bands) 
 
 # Leaderboard for Methods Explored
 
