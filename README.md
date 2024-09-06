@@ -26,8 +26,11 @@ The competition details can be reviewed at https://zindi.africa/competitions/ine
 The training (labeled) and test (non-labeled) data is located at https://drive.google.com/drive/folders/1cmrvNLNZq01pSrjQDneuE_N80rcmeNq3?usp=sharing The Drive folder contains the files:
 
 * train_data.h5: Training 1.1M records
+  * number of 1's is equal to 1,000,000, the number of 0's is 100,000 
 * test_data.h5: Testing 120k records
-* id_map.csv: identificator for the entries in the test data split. 
+* id_map.csv: identificator for the entries in the test data split.
+
+
 
 
 The landsat image patches have dimensions 16 (pixels) x 16 (pixels) x 6 (bands) 
@@ -38,6 +41,8 @@ The landsat image patches have dimensions 16 (pixels) x 16 (pixels) x 6 (bands)
 ---------|---------|---------------------------------------------|-------------------------------------------|
 | RF     |         | gcim_challenge_baseline_models.ipynb        |jupyter notebook provided by the organizers|
 | NN     |         | gcim_challenge_baseline_models.ipynb        |jupyter notebook provided by the organizers|
+| NN     |         | gcim_challenge_baseline_models.ipynb        |jupyter notebook provided by the organizers|
+
 
 
 
