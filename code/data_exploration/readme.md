@@ -67,11 +67,13 @@ La matriz de informacion mutua normalizada es
 |SWIR1|    |     |     |     | 	   |0.255|
 |SWIR2|    |     |     |     |     |	    |
 
-The fact that the normalized mutual information is low but the linear correlation coefficient is strange. The following graph shows a scatter plot between the red band and the swir1.
+The fact that the normalized mutual information is low but the linear correlation coefficient is strange. The following graph shows a scatter plot between the red band and the swir1 beforing chopping.
 
 
 ![alt text](https://github.com/joaquinsalas/zindi/blob/main/code/data_exploration/red_vs_swir1.png?raw=true)
 
+
+At this moment (2024.09.06), I am going to chop the negative values but leave the extreme positive values alone.
  
 
  
