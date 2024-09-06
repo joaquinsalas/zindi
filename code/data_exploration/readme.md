@@ -10,8 +10,6 @@ Band statistics
 |SWIR2|	1507.33|	1009.57|	20000|-9999|
 
 
-![imagen](https://github.com/user-attachments/assets/e2111887-4745-4aa8-809b-f064ea23b221)
-
 
 ![alt text](https://github.com/joaquinsalas/zindi/blob/main/code/data_exploration/Blue.png?raw=true)
 ![alt text](https://github.com/joaquinsalas/zindi/blob/main/code/data_exploration/Green.png?raw=true)
