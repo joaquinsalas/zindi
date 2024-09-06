@@ -43,4 +43,31 @@ I chop the values of each band between 0 and 6,000. These are the new results
 ![alt text](https://github.com/joaquinsalas/zindi/blob/main/code/data_exploration/SWIR1.png?raw=true)
 ![alt text](https://github.com/joaquinsalas/zindi/blob/main/code/data_exploration/SWIR2.png?raw=true)
 
+The linear correlation coefficient between the bands is
+
+
+|	    |Blue |Green|	Red	|NIR	 |SWIR1|SWIR2|
+|-----|-----|-----|-----|-----|-----|-----|     
+|Blue	|     |0.985|0.954|0.941|0.926|0.920|
+|Green|     |	    |0.972|0.954|0.933|0.926|
+|Red	 |     |     |     |0.985|0.954|0.941|
+|NIR	 |     |     |     |	    |0.972|0.954|
+|SWIR1|     |     |     |     |     |0.985|
+|SWIR2|     |     |     |     |     | 	   |
+
+
+La matriz de informacion mutua normalizada es 
+
+|	    |Blue |Green|	Red	|NIR	 |SWIR1|SWIR2|
+|-----|-----|-----|-----|-----|-----|-----|     
+|Blue	|    |0.255|0.192|0.175|0.161|0.156|
+|Green|    |     |0.234|0.192|0.169|0.161|
+|Red	 |    |     | 	   |0.255|0.192|0.175|
+|NIR	 |    |     |     | 	   |0.234|0.192|
+|SWIR1|    |     |     |     | 	   |0.255|
+|SWIR2|    |     |     |     |     |	    |
+
+
+
+
 
