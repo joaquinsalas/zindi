@@ -38,6 +38,16 @@ X_test = scaler.transform(X_test)
 scaler_filename = '../data/standardization_params.npy'
 np.save(scaler_filename, scaler.mean_)
 
+# Count the number of 0's and 1's in y_train to calculate the class weights
+num_zeros = np.sum(y_train == 0)
+num_ones = np.sum(y_train == 1)
+
+# Calculate the weight for the minority class (class 1)
+class_weight = num_zeros / num_ones
+
+# Save the class weight
+with open('../data/class_weight.txt', 'w') as f:
+    f.write(f"Class weight (minority class 1): {class_weight}\n")
 
 # Define the neural network model class
 class NeuralNet(nn.Module):
@@ -58,7 +68,6 @@ class NeuralNet(nn.Module):
     def forward(self, x):
         x = self.model(x)
         return x.squeeze()  # Flatten to match the shape of the target (batch_size,)
-
 
 # Define a function to train the model
 def train_model(model, criterion, optimizer, num_epochs, patience):
@@ -101,14 +110,12 @@ def train_model(model, criterion, optimizer, num_epochs, patience):
     model.load_state_dict(best_model)
     return model, history
 
+# Define the loss function using the calculated class weight
+criterion = nn.BCEWithLogitsLoss(pos_weight=torch.tensor([class_weight]))
 
 # Hyperparameter search space
 layer_sizes = [1, 2, 3]
 neuron_counts = np.arange(100, 1101, 100)
-
-# Narrow search for demonstration
-#layer_sizes = [1]
-#neuron_counts = np.arange(50, 60, 50)
 
 best_model = None
 best_hyperparams = None
@@ -120,7 +127,6 @@ for num_layers in layer_sizes:
         print(f"Training model with {num_layers} layers and {num_neurons} neurons per layer...")
         hidden_sizes = [num_neurons] * num_layers
         model = NeuralNet(X_train.shape[1], hidden_sizes)
-        criterion = nn.BCEWithLogitsLoss()
         optimizer = optim.Adam(model.parameters(), lr=0.001)
 
         # Train the model
@@ -144,13 +150,24 @@ for num_layers in layer_sizes:
 # Save the best model and hyperparameters
 torch.save(best_model.state_dict(), "../data/best_model_nn.pth")
 with open('../data/best_hyperparameters_fc_nn.txt', 'w') as f:
-    f.write(f"Best model: {best_hyperparams}, AUC: {best_auc}\n")
+    f.write(f"Best model: {best_hyperparams}, AUC: {best_auc}, Class Weight: {class_weight}\n")
 
 # Plotting the precision-recall and ROC curves on test data
 test_probs = test_outputs
 
 # Precision-recall curve
 precision, recall, _ = precision_recall_curve(y_test, test_probs)
+
+# Save precision-recall values to CSV
+pr_data = pd.DataFrame({'Precision': precision, 'Recall': recall})
+pr_data.to_csv('../data/precision_recall_values_fc_nn.csv', index=False)
+
+# Save FPR-TPR values to CSV
+roc_data = pd.DataFrame({'FPR': fpr, 'TPR': tpr})
+roc_data.to_csv('../data/fpr_tpr_values_fc_nn.csv', index=False)
+
+print("Precision-recall and FPR-TPR values saved to CSV files.")
+
 plt.figure(figsize=(10, 8))
 plt.plot(recall, precision, color='white')
 plt.title('Precision-Recall Curve', fontsize=16, color='white')
@@ -164,8 +181,7 @@ plt.close()
 # ROC curve
 plt.figure(figsize=(10, 8))
 plt.plot(fpr, tpr, color='white')
-plt.plot([0,1], [0,1], '-', color='white')
-
+plt.plot([0, 1], [0, 1], '-', color='white')
 plt.title('ROC Curve', fontsize=16, color='white')
 plt.xlabel('False Positive Rate', fontsize=14, color='white')
 plt.ylabel('True Positive Rate', fontsize=14, color='white')
