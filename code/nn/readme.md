@@ -5,4 +5,4 @@ It tries the number of layers between 1 and 4. The number of neurons range from 
 
 
 
-
+Best model: (2 layers, 1100 neurons/layer), AUC: 0.853, Class Weight: 10
