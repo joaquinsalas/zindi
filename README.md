@@ -41,7 +41,7 @@ The landsat image patches have dimensions 16 (pixels) x 16 (pixels) x 6 (bands)
 ---------|---------|---------------------------------------------|-------------------------------------------|
 | RF     |         | gcim_challenge_baseline_models.ipynb        |jupyter notebook provided by the organizers|
 | NN     |         | gcim_challenge_baseline_models.ipynb        |jupyter notebook provided by the organizers|
-| NN     |         | gcim_challenge_baseline_models.ipynb        |jupyter notebook provided by the organizers|
+| NN     |   0.85  | gcim_challenge_baseline_models.ipynb        |jupyter notebook provided by the organizers|
 
 
 
