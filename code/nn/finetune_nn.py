@@ -49,6 +49,31 @@ class_weight = num_zeros / num_ones
 with open('../data/class_weight.txt', 'w') as f:
     f.write(f"Class weight (minority class 1): {class_weight}\n")
 
+import torch.nn.functional as F
+
+
+class FocalLoss(nn.Module):
+    def __init__(self, alpha=1, gamma=2):
+        super(FocalLoss, self).__init__()
+        self.alpha = alpha  # Weighting factor for the positive class
+        self.gamma = gamma  # Focusing parameter
+
+    def forward(self, inputs, targets):
+        # Calculate binary cross-entropy
+        BCE_loss = F.binary_cross_entropy_with_logits(inputs, targets, reduction='none')
+
+        # Apply sigmoid to get probabilities
+        probs = torch.sigmoid(inputs)
+        probs = torch.where(targets == 1, probs, 1 - probs)  # Focus on the correct class probability
+
+        # Apply the focal loss modulating factor
+        focal_loss = self.alpha * (1 - probs) ** self.gamma * BCE_loss
+
+        return focal_loss.mean()
+
+
+
+
 # Define the neural network model class
 class NeuralNet(nn.Module):
     def __init__(self, input_size, hidden_sizes):
@@ -111,10 +136,13 @@ def train_model(model, criterion, optimizer, num_epochs, patience):
     return model, history
 
 # Define the loss function using the calculated class weight
-criterion = nn.BCEWithLogitsLoss(pos_weight=torch.tensor([class_weight]))
+#criterion = nn.BCEWithLogitsLoss(pos_weight=torch.tensor([class_weight]))
+# Define the loss function using Focal Loss
+criterion = FocalLoss(alpha=class_weight, gamma=2)
+
 
 # Hyperparameter search space
-layer_sizes = [1, 2, 3]
+layer_sizes = [2, 3]
 neuron_counts = np.arange(100, 1101, 100)
 
 best_model = None
@@ -124,28 +152,29 @@ best_auc = 0
 # Hyperparameter search
 for num_layers in layer_sizes:
     for num_neurons in neuron_counts:
-        print(f"Training model with {num_layers} layers and {num_neurons} neurons per layer...")
-        hidden_sizes = [num_neurons] * num_layers
-        model = NeuralNet(X_train.shape[1], hidden_sizes)
-        optimizer = optim.Adam(model.parameters(), lr=0.001)
+        if num_layers > 0:
+            print(f"Training model with {num_layers} layers and {num_neurons} neurons per layer...")
+            hidden_sizes = [num_neurons] * num_layers
+            model = NeuralNet(X_train.shape[1], hidden_sizes)
+            optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-        # Train the model
-        trained_model, history = train_model(model, criterion, optimizer, num_epochs=1000, patience=10)
+            # Train the model
+            trained_model, history = train_model(model, criterion, optimizer, num_epochs=10000, patience=50)
 
-        # Validate on the test data
-        model.eval()
-        with torch.no_grad():
-            test_outputs = model(torch.tensor(X_test, dtype=torch.float32))
-            test_outputs = torch.sigmoid(test_outputs).numpy()  # Sigmoid activation for binary classification
-            fpr, tpr, _ = roc_curve(y_test, test_outputs)
-            test_auc = auc(fpr, tpr)
+            # Validate on the test data
+            model.eval()
+            with torch.no_grad():
+                test_outputs = model(torch.tensor(X_test, dtype=torch.float32))
+                test_outputs = torch.sigmoid(test_outputs).numpy()  # Sigmoid activation for binary classification
+                fpr, tpr, _ = roc_curve(y_test, test_outputs)
+                test_auc = auc(fpr, tpr)
 
-        # Check if this is the best model
-        if test_auc > best_auc:
-            best_auc = test_auc
-            best_model = trained_model
-            best_hyperparams = (num_layers, num_neurons)
-            print(f"New best model found with AUC: {best_auc}")
+            # Check if this is the best model
+            if test_auc > best_auc:
+                best_auc = test_auc
+                best_model = trained_model
+                best_hyperparams = (num_layers, num_neurons)
+                print(f"New best model found with AUC: {best_auc}")
 
 # Save the best model and hyperparameters
 torch.save(best_model.state_dict(), "../data/best_model_nn.pth")
