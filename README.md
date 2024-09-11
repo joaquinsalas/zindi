@@ -43,6 +43,7 @@ The landsat image patches have dimensions 16 (pixels) x 16 (pixels) x 6 (bands)
 | NN     |         | gcim_challenge_baseline_models.ipynb        |jupyter notebook provided by the organizers|
 | NN     |   0.85  | finetune_nn.py                              |best nn after architecture search          |
 | NN     |   0.83  | finetune_nn_AE.py                           |autoencoder followed by FC NN              |
+| NN     |   0.88  | CNN_first_attempy.py                        |CNN, three convolutional layers, two FC    |
 
 
 
