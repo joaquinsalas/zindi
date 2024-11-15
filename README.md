@@ -1,4 +1,4 @@
-# Settlements
+# Detecting Human Settlements
 
 
 The competition details can be reviewed at https://zindi.africa/competitions/inegi-gcim-human-settlement-detection-challenge.
