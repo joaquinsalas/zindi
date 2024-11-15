@@ -43,8 +43,8 @@ This solution was improved thanks to a suggestion by [Koleshjr](https://zindi.af
 * In this repository, you will find:
   - Code for training the model: `settlements_s5_c17c.py`
   - Code for preparing a submission to Zindi: `settlements_s5_c17_zindi.py`
-  - The best model weights: `s5_model_17c.pth`
-  - The best submission file: `s5_model_submission.csv`
+  - The best model weights: `best_s5_model_17c.pth`
+  - The best submission file: `best_s5_model_submission.csv`
 
  
 
