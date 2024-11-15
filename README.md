@@ -17,7 +17,11 @@ The training (labeled) and test (non-labeled) data contain the files:
 
 # Approach 
 
-The solution implements the simplified structured state space sequencing (s5) model, as described by Smith et al. <a href="[URL](https://arxiv.org/abs/2208.04933)"></a>. The s5 model extends the s4 ideas of Gu et al. by using multi-input, multi-output state space models. In turn, s4 expands on the idea of linear time invariant dynamical systems (LTI), which are given by the continuous equations:
+Here’s the corrected version with proper markdown syntax and clarity:
+
+```markdown
+The solution implements the Simplified Structured State Space Sequencing (S5) model, as described by Smith et al. [https://arxiv.org/abs/2208.04933](https://arxiv.org/abs/2208.04933).
+```. The s5 model extends the s4 ideas of Gu et al. by using multi-input, multi-output state space models. In turn, s4 expands on the idea of linear time invariant dynamical systems (LTI), which are given by the continuous equations:
 
 $$
 \dot{\mathbf{x}}(t) = \mathbf{A}\mathbf{x}(t) + \mathbf{B}\mathbf{u}(t)
