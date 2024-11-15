@@ -36,12 +36,12 @@ This solution improved thanks to the suggestion by [Koleshjr](https://zindi.afri
 
 # Instruction
 
-* Install the s5 model, not the original code, [here](https://github.com/i404788/s5-pytorch)
+* Install the s5 model provided by i404788 [here](https://github.com/i404788/s5-pytorch)
 * In this repository, you will find
   ** Code for training the model ``settlements_s5_c17c.py"
   ** Code for preparing a submission to zindi ``settlements_s5_c17_zindi.py"
-  ** The model weights ``s5_model_17c.pth"
-  ** The submission file ``s5_model_submission.csv"
+  ** The best model weights ``s5_model_17c.pth"
+  ** The best submission file ``s5_model_submission.csv"
 
 
 
