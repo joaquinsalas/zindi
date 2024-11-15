@@ -13,7 +13,7 @@ Using the code provided in this GitHub repository, I achieved the following scor
 
 # Approach 
 
-The solution implements the **Simplified Structured State Space Sequencing (S5)** model, as described by [Smith et al.](https://arxiv.org/abs/2208.04933). The S5 model extends the S4 ideas of [Gu et al.](https://arxiv.org/abs/2111.00396) by using multi-input, multi-output state space models. In turn, S4 expands on the concept of linear time-invariant dynamical systems (LTI), which are governed by the following continuous equations:
+The solution implements the **Simplified Structured State Space Sequencing (S5)** model, as described by [Smith et al.](https://arxiv.org/abs/2208.04933) The S5 model extends the S4 ideas of [Gu et al.](https://arxiv.org/abs/2111.00396) by using multi-input, multi-output state space models. In turn, S4 expands on the concept of linear time-invariant dynamical systems (LTI), which are governed by the following continuous equations:
 
 $$
 \dot{\mathbf{x}}(t) = \mathbf{A}\mathbf{x}(t) + \mathbf{B}\mathbf{u}(t)
