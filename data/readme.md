@@ -1,4 +1,4 @@
-Down load 
+Download the files 
 
 * train_data.h5
 * test_data.h5
